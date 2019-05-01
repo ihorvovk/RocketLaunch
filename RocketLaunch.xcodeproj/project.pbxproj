@@ -28,6 +28,10 @@
 		FD61A9F92279CEA500264EC3 /* RxCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD61A9D12279C9F800264EC3 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD61A9FA2279CEA500264EC3 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD61A9D22279C9F800264EC3 /* RxSwift.framework */; };
 		FD61A9FB2279CEA500264EC3 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD61A9D22279C9F800264EC3 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FD61A9FF2279D0D000264EC3 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD61A9FD2279D0BF00264EC3 /* CocoaLumberjack.framework */; };
+		FD61AA002279D0D000264EC3 /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD61A9FD2279D0BF00264EC3 /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FD61AA032279D0FF00264EC3 /* ReactorKitRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD61AA012279D0F200264EC3 /* ReactorKitRuntime.framework */; };
+		FD61AA042279D0FF00264EC3 /* ReactorKitRuntime.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD61AA012279D0F200264EC3 /* ReactorKitRuntime.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +52,9 @@
 			dstSubfolderSpec = 10;
 			files = (
 				FD61A9F92279CEA500264EC3 /* RxCocoa.framework in Embed Frameworks */,
+				FD61AA042279D0FF00264EC3 /* ReactorKitRuntime.framework in Embed Frameworks */,
 				FD61A9F52279CEA500264EC3 /* CocoaLumberjackSwift.framework in Embed Frameworks */,
+				FD61AA002279D0D000264EC3 /* CocoaLumberjack.framework in Embed Frameworks */,
 				FD61A9FB2279CEA500264EC3 /* RxSwift.framework in Embed Frameworks */,
 				FD61A9EF2279CEA500264EC3 /* ReactorKit.framework in Embed Frameworks */,
 				FD61A9F72279CEA500264EC3 /* ObjectMapper.framework in Embed Frameworks */,
@@ -79,6 +85,8 @@
 		FD61A9D52279C9F800264EC3 /* CocoaLumberjackSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjackSwift.framework; path = Carthage/Build/iOS/CocoaLumberjackSwift.framework; sourceTree = "<group>"; };
 		FD61A9D62279C9F800264EC3 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		FD61A9DD2279CE5A00264EC3 /* ReactorKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactorKit.framework; path = Carthage/Build/iOS/ReactorKit.framework; sourceTree = "<group>"; };
+		FD61A9FD2279D0BF00264EC3 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
+		FD61AA012279D0F200264EC3 /* ReactorKitRuntime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactorKitRuntime.framework; path = Carthage/Build/iOS/ReactorKitRuntime.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +95,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD61A9F82279CEA500264EC3 /* RxCocoa.framework in Frameworks */,
+				FD61AA032279D0FF00264EC3 /* ReactorKitRuntime.framework in Frameworks */,
 				FD61A9F42279CEA500264EC3 /* CocoaLumberjackSwift.framework in Frameworks */,
+				FD61A9FF2279D0D000264EC3 /* CocoaLumberjack.framework in Frameworks */,
 				FD61A9FA2279CEA500264EC3 /* RxSwift.framework in Frameworks */,
 				FD61A9EE2279CEA500264EC3 /* ReactorKit.framework in Frameworks */,
 				FD61A9F62279CEA500264EC3 /* ObjectMapper.framework in Frameworks */,
@@ -151,6 +161,8 @@
 		FD61A9D02279C9C300264EC3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD61AA012279D0F200264EC3 /* ReactorKitRuntime.framework */,
+				FD61A9FD2279D0BF00264EC3 /* CocoaLumberjack.framework */,
 				FD61A9DD2279CE5A00264EC3 /* ReactorKit.framework */,
 				FD61A9D42279C9F800264EC3 /* Alamofire.framework */,
 				FD61A9D32279C9F800264EC3 /* AlamofireObjectMapper.framework */,
