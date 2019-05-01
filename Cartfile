@@ -1,0 +1,6 @@
+github "Alamofire/Alamofire"
+github "CocoaLumberjack/CocoaLumberjack"
+github "tristanhimmelman/ObjectMapper" ~> 3.4
+github "tristanhimmelman/AlamofireObjectMapper" ~> 5.2
+github "ReactiveX/RxSwift" ~> 4.0
+github "ReactorKit/ReactorKit"
