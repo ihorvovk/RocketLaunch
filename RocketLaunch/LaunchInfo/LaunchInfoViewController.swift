@@ -3,7 +3,7 @@
 //  RocketLaunch
 //
 //  Created by Ihor Vovk on 5/5/19.
-//  Copyright © 2019 Ihor vovk. All rights reserved.
+//  Copyright © 2019 Ihor Vovk. All rights reserved.
 //
 
 import UIKit
