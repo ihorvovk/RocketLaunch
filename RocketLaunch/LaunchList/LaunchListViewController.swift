@@ -38,11 +38,11 @@ class LaunchListViewController: UIViewController, StoryboardView {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         
-        tableView.rx.prefetchRows.map { Reactor.Action.prefetchLaunches(indexPaths: $0) }
+        tableView.rx.prefetchRows.map { Reactor.Action.fetchLaunches(indexPaths: $0) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
     
-        tableView.rx.willDisplayCell.map { Reactor.Action.prefetchLaunches(indexPaths: [$0.indexPath]) }
+        tableView.rx.willDisplayCell.map { Reactor.Action.fetchLaunches(indexPaths: [$0.indexPath]) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
         

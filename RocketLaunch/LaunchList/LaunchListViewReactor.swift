@@ -14,7 +14,7 @@ import PagedArray
 class LaunchListViewReactor: Reactor {
     
     enum Action {
-        case prefetchLaunches(indexPaths: [IndexPath])
+        case fetchLaunches(indexPaths: [IndexPath])
         case setLaunch(index: Int, isFavorite: Bool)
         case search(String?)
         case reload
@@ -40,7 +40,7 @@ class LaunchListViewReactor: Reactor {
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-        case .prefetchLaunches(indexPaths: let indexPaths):
+        case .fetchLaunches(indexPaths: let indexPaths):
             return mutateFetchLaunches(indexPaths: indexPaths)
         case .setLaunch(index: let index, isFavorite: let isFavorite):
             return mutateSetLaunch(index: index, isFavorite: isFavorite)

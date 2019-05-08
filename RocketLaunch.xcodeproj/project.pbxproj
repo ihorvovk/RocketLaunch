@@ -13,6 +13,8 @@
 		FD145B09227F76CC007E75EB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD145B08227F76CC007E75EB /* Coordinator.swift */; };
 		FD145B0B227F8370007E75EB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD145B0A227F836F007E75EB /* WebKit.framework */; };
 		FD145B0D22816791007E75EB /* FavoriteLaunchListViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD145B0C22816791007E75EB /* FavoriteLaunchListViewReactor.swift */; };
+		FD14C2F92282F3BB00154D5F /* LaunchLibraryManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C2F82282F3BB00154D5F /* LaunchLibraryManagerMock.swift */; };
+		FD14C2FB2282F45500154D5F /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD61A9D22279C9F800264EC3 /* RxSwift.framework */; };
 		FD1F1FB6227E313C007C83B1 /* PagedArray.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1F1FB4227E3128007C83B1 /* PagedArray.framework */; };
 		FD1F1FB7227E313C007C83B1 /* PagedArray.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD1F1FB4227E3128007C83B1 /* PagedArray.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD1F1FB9227ED7F4007C83B1 /* RocketLaunchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1F1FB8227ED7F4007C83B1 /* RocketLaunchPage.swift */; };
@@ -91,6 +93,7 @@
 		FD145B08227F76CC007E75EB /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		FD145B0A227F836F007E75EB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		FD145B0C22816791007E75EB /* FavoriteLaunchListViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLaunchListViewReactor.swift; sourceTree = "<group>"; };
+		FD14C2F82282F3BB00154D5F /* LaunchLibraryManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchLibraryManagerMock.swift; sourceTree = "<group>"; };
 		FD1F1FB4227E3128007C83B1 /* PagedArray.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PagedArray.framework; path = Carthage/Build/iOS/PagedArray.framework; sourceTree = "<group>"; };
 		FD1F1FB8227ED7F4007C83B1 /* RocketLaunchPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketLaunchPage.swift; sourceTree = "<group>"; };
 		FD1F1FBA227F13E7007C83B1 /* Rocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rocket.swift; sourceTree = "<group>"; };
@@ -148,12 +151,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD14C2FB2282F45500154D5F /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD14C2FA2282F3C400154D5F /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				FD14C2F82282F3BB00154D5F /* LaunchLibraryManagerMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		FD1F1FC0227F4956007C83B1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +244,7 @@
 		FD61A9C32279BFB700264EC3 /* RocketLaunchTests */ = {
 			isa = PBXGroup;
 			children = (
+				FD14C2FA2282F3C400154D5F /* Mocks */,
 				FD61A9C42279BFB700264EC3 /* RocketLaunchTests.swift */,
 				FD61A9C62279BFB700264EC3 /* Info.plist */,
 			);
@@ -380,6 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD14C2F92282F3BB00154D5F /* LaunchLibraryManagerMock.swift in Sources */,
 				FD61A9C52279BFB700264EC3 /* RocketLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,6 +595,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8684QJA92T;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RocketLaunchTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -602,6 +620,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8684QJA92T;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RocketLaunchTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
