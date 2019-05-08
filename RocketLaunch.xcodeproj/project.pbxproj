@@ -7,9 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD145B04227F7639007E75EB /* LaunchInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1F1FC2227F49CF007C83B1 /* LaunchInfoViewController.swift */; };
+		FD145B05227F763D007E75EB /* LaunchInfoViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1F1FC4227F49E4007C83B1 /* LaunchInfoViewReactor.swift */; };
+		FD145B07227F767E007E75EB /* LaunchInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD145B06227F767E007E75EB /* LaunchInfo.storyboard */; };
+		FD145B09227F76CC007E75EB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD145B08227F76CC007E75EB /* Coordinator.swift */; };
+		FD145B0B227F8370007E75EB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD145B0A227F836F007E75EB /* WebKit.framework */; };
+		FD145B0D22816791007E75EB /* FavoriteLaunchListViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD145B0C22816791007E75EB /* FavoriteLaunchListViewReactor.swift */; };
+		FD1F1FB6227E313C007C83B1 /* PagedArray.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1F1FB4227E3128007C83B1 /* PagedArray.framework */; };
+		FD1F1FB7227E313C007C83B1 /* PagedArray.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD1F1FB4227E3128007C83B1 /* PagedArray.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FD1F1FB9227ED7F4007C83B1 /* RocketLaunchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1F1FB8227ED7F4007C83B1 /* RocketLaunchPage.swift */; };
+		FD1F1FBB227F13E7007C83B1 /* Rocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1F1FBA227F13E7007C83B1 /* Rocket.swift */; };
+		FD1F1FBE227F188C007C83B1 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1F1FBC227F1875007C83B1 /* AlamofireImage.framework */; };
+		FD1F1FBF227F188C007C83B1 /* AlamofireImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD1F1FBC227F1875007C83B1 /* AlamofireImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD61A9AE2279BFA700264EC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61A9AD2279BFA700264EC3 /* AppDelegate.swift */; };
-		FD61A9B02279BFA700264EC3 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61A9AF2279BFA700264EC3 /* FirstViewController.swift */; };
-		FD61A9B22279BFA700264EC3 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61A9B12279BFA700264EC3 /* SecondViewController.swift */; };
+		FD61A9B02279BFA700264EC3 /* LaunchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61A9AF2279BFA700264EC3 /* LaunchListViewController.swift */; };
 		FD61A9B52279BFA700264EC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD61A9B32279BFA700264EC3 /* Main.storyboard */; };
 		FD61A9B72279BFB700264EC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD61A9B62279BFB700264EC3 /* Assets.xcassets */; };
 		FD61A9BA2279BFB700264EC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD61A9B82279BFB700264EC3 /* LaunchScreen.storyboard */; };
@@ -32,6 +43,12 @@
 		FD61AA002279D0D000264EC3 /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD61A9FD2279D0BF00264EC3 /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD61AA032279D0FF00264EC3 /* ReactorKitRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD61AA012279D0F200264EC3 /* ReactorKitRuntime.framework */; };
 		FD61AA042279D0FF00264EC3 /* ReactorKitRuntime.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD61AA012279D0F200264EC3 /* ReactorKitRuntime.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FD61AA062279D30B00264EC3 /* LaunchListViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61AA052279D30B00264EC3 /* LaunchListViewReactor.swift */; };
+		FD61AA082279DEA900264EC3 /* LaunchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61AA072279DEA900264EC3 /* LaunchTableViewCell.swift */; };
+		FD61AA0A2279E0D200264EC3 /* RocketLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61AA092279E0D200264EC3 /* RocketLaunch.swift */; };
+		FD61AA0C2279E20600264EC3 /* LaunchLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61AA0B2279E20600264EC3 /* LaunchLibraryManager.swift */; };
+		FD61AA0F227AE03D00264EC3 /* RxAlamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD61AA0D227AE02300264EC3 /* RxAlamofire.framework */; };
+		FD61AA10227AE03D00264EC3 /* RxAlamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD61AA0D227AE02300264EC3 /* RxAlamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,12 +69,15 @@
 			dstSubfolderSpec = 10;
 			files = (
 				FD61A9F92279CEA500264EC3 /* RxCocoa.framework in Embed Frameworks */,
+				FD61AA10227AE03D00264EC3 /* RxAlamofire.framework in Embed Frameworks */,
 				FD61AA042279D0FF00264EC3 /* ReactorKitRuntime.framework in Embed Frameworks */,
+				FD1F1FBF227F188C007C83B1 /* AlamofireImage.framework in Embed Frameworks */,
 				FD61A9F52279CEA500264EC3 /* CocoaLumberjackSwift.framework in Embed Frameworks */,
 				FD61AA002279D0D000264EC3 /* CocoaLumberjack.framework in Embed Frameworks */,
 				FD61A9FB2279CEA500264EC3 /* RxSwift.framework in Embed Frameworks */,
 				FD61A9EF2279CEA500264EC3 /* ReactorKit.framework in Embed Frameworks */,
 				FD61A9F72279CEA500264EC3 /* ObjectMapper.framework in Embed Frameworks */,
+				FD1F1FB7227E313C007C83B1 /* PagedArray.framework in Embed Frameworks */,
 				FD61A9F32279CEA500264EC3 /* AlamofireObjectMapper.framework in Embed Frameworks */,
 				FD61A9F12279CEA500264EC3 /* Alamofire.framework in Embed Frameworks */,
 			);
@@ -67,10 +87,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FD145B06227F767E007E75EB /* LaunchInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchInfo.storyboard; sourceTree = "<group>"; };
+		FD145B08227F76CC007E75EB /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		FD145B0A227F836F007E75EB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		FD145B0C22816791007E75EB /* FavoriteLaunchListViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLaunchListViewReactor.swift; sourceTree = "<group>"; };
+		FD1F1FB4227E3128007C83B1 /* PagedArray.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PagedArray.framework; path = Carthage/Build/iOS/PagedArray.framework; sourceTree = "<group>"; };
+		FD1F1FB8227ED7F4007C83B1 /* RocketLaunchPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketLaunchPage.swift; sourceTree = "<group>"; };
+		FD1F1FBA227F13E7007C83B1 /* Rocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rocket.swift; sourceTree = "<group>"; };
+		FD1F1FBC227F1875007C83B1 /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = Carthage/Build/iOS/AlamofireImage.framework; sourceTree = "<group>"; };
+		FD1F1FC2227F49CF007C83B1 /* LaunchInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchInfoViewController.swift; sourceTree = "<group>"; };
+		FD1F1FC4227F49E4007C83B1 /* LaunchInfoViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchInfoViewReactor.swift; sourceTree = "<group>"; };
 		FD61A9AA2279BFA700264EC3 /* RocketLaunch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RocketLaunch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD61A9AD2279BFA700264EC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FD61A9AF2279BFA700264EC3 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		FD61A9B12279BFA700264EC3 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		FD61A9AF2279BFA700264EC3 /* LaunchListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListViewController.swift; sourceTree = "<group>"; };
 		FD61A9B42279BFA700264EC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FD61A9B62279BFB700264EC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD61A9B92279BFB700264EC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -87,6 +116,11 @@
 		FD61A9DD2279CE5A00264EC3 /* ReactorKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactorKit.framework; path = Carthage/Build/iOS/ReactorKit.framework; sourceTree = "<group>"; };
 		FD61A9FD2279D0BF00264EC3 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		FD61AA012279D0F200264EC3 /* ReactorKitRuntime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactorKitRuntime.framework; path = Carthage/Build/iOS/ReactorKitRuntime.framework; sourceTree = "<group>"; };
+		FD61AA052279D30B00264EC3 /* LaunchListViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListViewReactor.swift; sourceTree = "<group>"; };
+		FD61AA072279DEA900264EC3 /* LaunchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchTableViewCell.swift; sourceTree = "<group>"; };
+		FD61AA092279E0D200264EC3 /* RocketLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketLaunch.swift; sourceTree = "<group>"; };
+		FD61AA0B2279E20600264EC3 /* LaunchLibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchLibraryManager.swift; sourceTree = "<group>"; };
+		FD61AA0D227AE02300264EC3 /* RxAlamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxAlamofire.framework; path = Carthage/Build/iOS/RxAlamofire.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,13 +128,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD145B0B227F8370007E75EB /* WebKit.framework in Frameworks */,
 				FD61A9F82279CEA500264EC3 /* RxCocoa.framework in Frameworks */,
+				FD61AA0F227AE03D00264EC3 /* RxAlamofire.framework in Frameworks */,
 				FD61AA032279D0FF00264EC3 /* ReactorKitRuntime.framework in Frameworks */,
+				FD1F1FBE227F188C007C83B1 /* AlamofireImage.framework in Frameworks */,
 				FD61A9F42279CEA500264EC3 /* CocoaLumberjackSwift.framework in Frameworks */,
 				FD61A9FF2279D0D000264EC3 /* CocoaLumberjack.framework in Frameworks */,
 				FD61A9FA2279CEA500264EC3 /* RxSwift.framework in Frameworks */,
 				FD61A9EE2279CEA500264EC3 /* ReactorKit.framework in Frameworks */,
 				FD61A9F62279CEA500264EC3 /* ObjectMapper.framework in Frameworks */,
+				FD1F1FB6227E313C007C83B1 /* PagedArray.framework in Frameworks */,
 				FD61A9F22279CEA500264EC3 /* AlamofireObjectMapper.framework in Frameworks */,
 				FD61A9F02279CEA500264EC3 /* Alamofire.framework in Frameworks */,
 			);
@@ -116,6 +154,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD1F1FC0227F4956007C83B1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FD1F1FBA227F13E7007C83B1 /* Rocket.swift */,
+				FD61AA092279E0D200264EC3 /* RocketLaunch.swift */,
+				FD1F1FB8227ED7F4007C83B1 /* RocketLaunchPage.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FD1F1FC1227F496C007C83B1 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				FD61AA0B2279E20600264EC3 /* LaunchLibraryManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		FD202DC7227F5C0D00EACF99 /* LaunchList */ = {
+			isa = PBXGroup;
+			children = (
+				FD61A9AF2279BFA700264EC3 /* LaunchListViewController.swift */,
+				FD61AA052279D30B00264EC3 /* LaunchListViewReactor.swift */,
+				FD145B0C22816791007E75EB /* FavoriteLaunchListViewReactor.swift */,
+				FD61AA072279DEA900264EC3 /* LaunchTableViewCell.swift */,
+			);
+			path = LaunchList;
+			sourceTree = "<group>";
+		};
+		FD202DC8227F5C2100EACF99 /* LaunchInfo */ = {
+			isa = PBXGroup;
+			children = (
+				FD145B06227F767E007E75EB /* LaunchInfo.storyboard */,
+				FD1F1FC2227F49CF007C83B1 /* LaunchInfoViewController.swift */,
+				FD1F1FC4227F49E4007C83B1 /* LaunchInfoViewReactor.swift */,
+			);
+			path = LaunchInfo;
+			sourceTree = "<group>";
+		};
 		FD61A9A12279BFA700264EC3 = {
 			isa = PBXGroup;
 			children = (
@@ -138,9 +215,12 @@
 		FD61A9AC2279BFA700264EC3 /* RocketLaunch */ = {
 			isa = PBXGroup;
 			children = (
+				FD1F1FC0227F4956007C83B1 /* Model */,
+				FD1F1FC1227F496C007C83B1 /* Managers */,
+				FD202DC7227F5C0D00EACF99 /* LaunchList */,
+				FD202DC8227F5C2100EACF99 /* LaunchInfo */,
+				FD145B08227F76CC007E75EB /* Coordinator.swift */,
 				FD61A9AD2279BFA700264EC3 /* AppDelegate.swift */,
-				FD61A9AF2279BFA700264EC3 /* FirstViewController.swift */,
-				FD61A9B12279BFA700264EC3 /* SecondViewController.swift */,
 				FD61A9B32279BFA700264EC3 /* Main.storyboard */,
 				FD61A9B62279BFB700264EC3 /* Assets.xcassets */,
 				FD61A9B82279BFB700264EC3 /* LaunchScreen.storyboard */,
@@ -161,6 +241,10 @@
 		FD61A9D02279C9C300264EC3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD145B0A227F836F007E75EB /* WebKit.framework */,
+				FD1F1FBC227F1875007C83B1 /* AlamofireImage.framework */,
+				FD1F1FB4227E3128007C83B1 /* PagedArray.framework */,
+				FD61AA0D227AE02300264EC3 /* RxAlamofire.framework */,
 				FD61AA012279D0F200264EC3 /* ReactorKitRuntime.framework */,
 				FD61A9FD2279D0BF00264EC3 /* CocoaLumberjack.framework */,
 				FD61A9DD2279CE5A00264EC3 /* ReactorKit.framework */,
@@ -259,6 +343,7 @@
 				FD61A9BA2279BFB700264EC3 /* LaunchScreen.storyboard in Resources */,
 				FD61A9B72279BFB700264EC3 /* Assets.xcassets in Resources */,
 				FD61A9B52279BFA700264EC3 /* Main.storyboard in Resources */,
+				FD145B07227F767E007E75EB /* LaunchInfo.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,9 +361,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD61A9B22279BFA700264EC3 /* SecondViewController.swift in Sources */,
+				FD1F1FBB227F13E7007C83B1 /* Rocket.swift in Sources */,
+				FD145B05227F763D007E75EB /* LaunchInfoViewReactor.swift in Sources */,
+				FD61AA0A2279E0D200264EC3 /* RocketLaunch.swift in Sources */,
+				FD1F1FB9227ED7F4007C83B1 /* RocketLaunchPage.swift in Sources */,
+				FD145B0D22816791007E75EB /* FavoriteLaunchListViewReactor.swift in Sources */,
 				FD61A9AE2279BFA700264EC3 /* AppDelegate.swift in Sources */,
-				FD61A9B02279BFA700264EC3 /* FirstViewController.swift in Sources */,
+				FD145B04227F7639007E75EB /* LaunchInfoViewController.swift in Sources */,
+				FD61AA082279DEA900264EC3 /* LaunchTableViewCell.swift in Sources */,
+				FD145B09227F76CC007E75EB /* Coordinator.swift in Sources */,
+				FD61AA062279D30B00264EC3 /* LaunchListViewReactor.swift in Sources */,
+				FD61AA0C2279E20600264EC3 /* LaunchLibraryManager.swift in Sources */,
+				FD61A9B02279BFA700264EC3 /* LaunchListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

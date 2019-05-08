@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tzv-8K-5k7">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="LpO-Ul-Kdk">
+            <objects>
+                <navigationController id="tzv-8K-5k7" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="h0y-ju-yKl">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="HN6-MP-wxg" kind="relationship" relationship="rootViewController" id="Fne-Ns-064"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MwM-sH-I4r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1548" y="-281"/>
+        </scene>
+        <!--Launch Info-->
+        <scene sceneID="I3w-g4-bWp">
+            <objects>
+                <viewController id="HN6-MP-wxg" customClass="LaunchInfoViewController" customModule="RocketLaunch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mAD-TS-Z6z">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Box-pa-Xnd">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bpy-WP-Rq3">
+                                <rect key="frame" x="197" y="465" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Box-pa-Xnd" secondAttribute="bottom" id="NqH-5L-bjw"/>
+                            <constraint firstItem="bpy-WP-Rq3" firstAttribute="centerY" secondItem="4XE-AR-HVq" secondAttribute="centerY" id="Rgx-Q4-FfY"/>
+                            <constraint firstItem="Box-pa-Xnd" firstAttribute="top" secondItem="mAD-TS-Z6z" secondAttribute="top" id="baf-Pp-0nd"/>
+                            <constraint firstItem="bpy-WP-Rq3" firstAttribute="centerX" secondItem="4XE-AR-HVq" secondAttribute="centerX" id="n5f-Sp-V4d"/>
+                            <constraint firstItem="Box-pa-Xnd" firstAttribute="trailing" secondItem="4XE-AR-HVq" secondAttribute="trailing" id="pjn-fD-PaW"/>
+                            <constraint firstItem="Box-pa-Xnd" firstAttribute="leading" secondItem="4XE-AR-HVq" secondAttribute="leading" id="t1O-6T-Tvj"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4XE-AR-HVq"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Launch Info" id="pBD-A2-1T8">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="7Fi-Ae-BNe">
+                            <connections>
+                                <action selector="doneWithSender:" destination="HN6-MP-wxg" id="jZA-Lr-2u1"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="blue_star_empty" id="Sq5-hC-32b"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="bpy-WP-Rq3" id="9h3-9z-FZR"/>
+                        <outlet property="favoriteBarButtonItem" destination="Sq5-hC-32b" id="tbS-CM-wUt"/>
+                        <outlet property="webView" destination="Box-pa-Xnd" id="3B7-x7-Zge"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ron-Ra-O34" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2322" y="-281"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="blue_star_empty" width="24" height="24"/>
+    </resources>
+</document>

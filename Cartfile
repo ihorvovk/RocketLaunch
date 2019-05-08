@@ -4,3 +4,6 @@ github "tristanhimmelman/ObjectMapper" ~> 3.4
 github "tristanhimmelman/AlamofireObjectMapper" ~> 5.2
 github "ReactiveX/RxSwift" ~> 4.0
 github "ReactorKit/ReactorKit"
+github "RxSwiftCommunity/RxAlamofire" ~> 4.4
+github "MrAlek/PagedArray"
+github "Alamofire/AlamofireImage" ~> 3.5
