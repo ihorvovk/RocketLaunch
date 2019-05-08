@@ -17,7 +17,7 @@ protocol LaunchListViewControllerDelegate: class {
     func launchListViewController(_ controller: LaunchListViewController, didSelectLaunch launch: RocketLaunch)
 }
 
-class LaunchListViewController: UITableViewController, StoryboardView {
+class LaunchListViewController: UIViewController, StoryboardView {
     
     var delegate: LaunchListViewControllerDelegate?
     var disposeBag = DisposeBag()
@@ -33,7 +33,7 @@ class LaunchListViewController: UITableViewController, StoryboardView {
                 cell.fill(rocketLaunch: launch, delegate: self)
                 cell.tag = row
             }.disposed(by: disposeBag)
-        
+                
         searchBar.rx.text.map { Reactor.Action.search($0) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
@@ -63,6 +63,7 @@ class LaunchListViewController: UITableViewController, StoryboardView {
     // MARK: - Implementation
     
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView!
     
     private var toggleFavoriteSubject = PublishSubject<(index: Int, isFavorite: Bool)>()
 }

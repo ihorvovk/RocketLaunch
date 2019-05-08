@@ -21,15 +21,14 @@ class LaunchListViewReactor: Reactor {
     }
     
     enum Mutation {
-        case setLaunchPage(RocketLaunchPage)
-        case setFavorites([Int])
+        case setLaunchPage(RocketLaunchPage, reset: Bool)
         case setSearchName(String?)
+        case refreshLaunches
         case resetLaunches
     }
     
     struct State {
         var launches: PagedArray<RocketLaunch>?
-        var favorites: [Int] = []
         var searchName: String?
     }
     
@@ -56,12 +55,12 @@ class LaunchListViewReactor: Reactor {
         var result = state
         
         switch mutation {
-        case .setLaunchPage(let launchPage):
-            return reduceSetLaunchPage(launchPage, state: state)
-        case .setFavorites(let favorites):
-            result.favorites = favorites
+        case .setLaunchPage(let launchPage, let reset):
+            return reduceSetLaunchPage(launchPage, reset: reset, state: state)
         case .setSearchName(let name):
             result.searchName = name
+        case .refreshLaunches:
+            break
         case .resetLaunches:
             result.launches = nil
         }
@@ -71,7 +70,7 @@ class LaunchListViewReactor: Reactor {
     
     func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
         let updateFavorites = launchLibraryManager.favoritesObservable.flatMap { [weak self] favorites -> Observable<Mutation> in
-            var result = Observable.just(Mutation.setFavorites(favorites))
+            var result = Observable.just(Mutation.refreshLaunches)
             if let `self` = self, self.launchIDFilter != nil {
                 result = result.concat(self.mutateReload())
             }
@@ -104,7 +103,7 @@ class LaunchListViewReactor: Reactor {
                 return launchLibraryManager.loadRocketLaunches(offset: page * loadLimit, limit: loadLimit, ids: launchIDFilter, name: currentState.searchName).do(onCompleted: { [weak self] in
                     self?.pagesLoading.remove(page)
                 }).catchError { _ in Observable.empty() }
-            }).map { Mutation.setLaunchPage($0) }
+            }).map { Mutation.setLaunchPage($0, reset: false) }
         } else {
             return Observable.empty()
         }
@@ -126,19 +125,19 @@ class LaunchListViewReactor: Reactor {
         }
         
         return Observable.concat(Observable.just(Mutation.setSearchName(name)), launchLibraryManager.loadRocketLaunches(offset: 0, limit: loadLimit, ids: launchIDFilter, name: searchName).flatMap { launchPage -> Observable<Mutation> in
-            return Observable.from([Mutation.resetLaunches, Mutation.setLaunchPage(launchPage)])
+            return Observable.just(Mutation.setLaunchPage(launchPage, reset: true))
         }).catchErrorJustReturn(Mutation.resetLaunches)
     }
     
     private func mutateReload() -> Observable<Mutation> {
         return launchLibraryManager.loadRocketLaunches(offset: 0, limit: loadLimit, ids: launchIDFilter).flatMap { launchPage -> Observable<Mutation> in
-            return Observable.from([Mutation.resetLaunches, Mutation.setLaunchPage(launchPage)])
+            return Observable.just(Mutation.setLaunchPage(launchPage, reset: true))
         }.catchErrorJustReturn(Mutation.resetLaunches)
     }
     
-    private func reduceSetLaunchPage(_ launchPage: RocketLaunchPage, state: State) -> State {
+    private func reduceSetLaunchPage(_ launchPage: RocketLaunchPage, reset: Bool, state: State) -> State {
         var result = state
-        if result.launches == nil, let total = launchPage.total {
+        if result.launches == nil || reset, let total = launchPage.total {
             result.launches = PagedArray(count: total, pageSize: loadLimit)
         }
         
@@ -147,9 +146,5 @@ class LaunchListViewReactor: Reactor {
         }
         
         return result
-    }
-    
-    private func reduceSetLaunch(atIndex index: Int, isFavorite: Bool, state: State) -> State {
-        return state
     }
 }
