@@ -6,39 +6,36 @@
 //  Copyright © 2019 Ihor Vovk. All rights reserved.
 //
 
+import RealmSwift
 import ObjectMapper
 
-struct RocketLaunchMapContext: MapContext {
-    let launchLibraryManager: LaunchLibraryManager
-}
-
-class RocketLaunch: Mappable {
+final class RocketLaunch: Object {
     
-    var id: Int?
-    var name: String?
-    var windowStart: Date?
-    var windowEnd: Date?
-    var country: String?
-    var status: Int?
-    var rocket: Rocket?
-    var infoURLs: [String]?
+    @objc dynamic var id: Int = 0
+    @objc dynamic var name: String = ""
+    @objc dynamic var net: Date?
+    @objc dynamic var windowStart: Date?
+    @objc dynamic var windowEnd: Date?
+    @objc dynamic var country: String?
+    @objc dynamic var status: Int = 0
+    @objc dynamic var rocket: Rocket?
+    var infoURLs: List<String>?
     
-    var statusDescription: String? {
-        if let status = status {
-            switch status {
-            case 1:
-                return "Green"
-            case 2:
-                return "Red"
-            case 3:
-                return "Success"
-            case 4:
-                return "Failed"
-            default:
-                return "\(status)"
-            }
-        } else {
-            return nil
+    @objc dynamic var isFullyLoaded = false
+    @objc dynamic var isFavorite = false
+    
+    var statusDescription: String {
+        switch status {
+        case 1:
+            return "Green"
+        case 2:
+            return "Red"
+        case 3:
+            return "Success"
+        case 4:
+            return "Failed"
+        default:
+            return "\(status)"
         }
     }
     
@@ -52,18 +49,19 @@ class RocketLaunch: Mappable {
         }
     }
     
-    var isFavorite: Bool {
-        get {
-            return launchLibraryManager?.isLaunchFavorite(self) ?? false
-        }
-
-        set(newIsFavorite) {
-            launchLibraryManager?.setLaunch(self, isFavorite: newIsFavorite)
-        }
+    override class func primaryKey() -> String? {
+        return "id"
     }
     
-    required init?(map: Map) {
-        launchLibraryManager = (map.context as? RocketLaunchMapContext)?.launchLibraryManager
+    override class func indexedProperties() -> [String] {
+        return ["index", "id", "name"]
+    }
+}
+
+extension RocketLaunch: Mappable {
+    
+    convenience init?(map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {
@@ -74,15 +72,12 @@ class RocketLaunch: Mappable {
         
         id <- map["id"]
         name <- map["name"]
-        windowStart <- (map["windowstart"] , dateFormatterTransform)
+        net <- (map["net"], dateFormatterTransform)
+        windowStart <- (map["windowstart"], dateFormatterTransform)
         windowEnd <- (map["windowend"], dateFormatterTransform)
         country <- map["location.countryCode"]
         status <- map["status"]
         rocket <- map["rocket"]
         infoURLs <- map["infoURLs"]
     }
-    
-    // MARK: - Implementation
-    
-    private let launchLibraryManager: LaunchLibraryManager?
 }

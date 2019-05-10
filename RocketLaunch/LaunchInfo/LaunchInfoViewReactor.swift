@@ -30,7 +30,10 @@ class LaunchInfoViewReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .toggleFavorite:
-            launch.isFavorite = !currentState.isFavorite
+            try? launch.realm?.write {
+                launch.isFavorite = !currentState.isFavorite
+            }
+            
             return Observable.just(.setFavorite(!currentState.isFavorite))
         }
     }
@@ -46,12 +49,15 @@ class LaunchInfoViewReactor: Reactor {
         return result
     }
     
-    init(launch: RocketLaunch) {
+    init(launchLibraryManager: LaunchLibraryManager, launch: RocketLaunch) {
+        self.launchLibraryManager = launchLibraryManager
         self.launch = launch
+        
         initialState = State(infoURL: launch.infoURL, isFavorite: launch.isFavorite)
     }
     
     // MARK: - Implementation
     
+    private let launchLibraryManager: LaunchLibraryManager
     private let launch: RocketLaunch
 }

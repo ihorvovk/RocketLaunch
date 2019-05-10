@@ -17,24 +17,24 @@ enum LaunchLibraryManagerError: Error {
 
 class LaunchLibraryManagerMock: LaunchLibraryManager {
     
-    override func loadRocketLaunches(offset: Int? = nil, limit: Int? = nil, ids: [Int]? = nil, name: String? = nil) -> Observable<RocketLaunchPage> {
-        if name == "Thor", let pageThor = RocketLaunchPage(JSON: pageThorJSON, context: RocketLaunchMapContext(launchLibraryManager: self)) {
-            pageThor.page = 0
-            return Observable.just(pageThor)
-        } else if offset == 0, limit == 2, let page0 = RocketLaunchPage(JSON: page1JSON, context: RocketLaunchMapContext(launchLibraryManager: self)) {
-            page0.page = 0
-            return Observable.just(page0)
-        } else if offset == 2, limit == 2, let page1 = RocketLaunchPage(JSON: page2JSON, context: RocketLaunchMapContext(launchLibraryManager: self)) {
-            page1.page = 1
-            return Observable.just(page1)
-        } else {
-            return Observable.error(LaunchLibraryManagerError.error)
-        }
+    let rocketLaunchesJSON: [[String: Any]] = [["id": 1698, "name": "Falcon 9 Block 5 | Starlink"], ["id": 1615,"name": "PSLV  | RISAT-2B"], ["id": 1679,"name": "Soyuz 2.1b/Fregat | Glonass-M"], ["id": 1659,"name": "Kuaizhou-1A | Unknown"], ["id": 1661,"name": "Soyuz 2.1a/Fregat | Meridian-M 18"]]
+    
+    let rocketLaunchDetailsJSON: [[String:  Any]] = [["id": 1698, "name": "Falcon 9 Block 5 | Starlink", "windowstart": "2019-05-16 02:30:00", "windowend": "2019-05-16 04:00:00", "net": "May 16, 2019 02:30:00 UTC", "status": 1, "tbdtime": 0, "vidURLs": ["https://www.spacex.com/webcast"], "tbddate": 0, "probability": -1, "changed": "2019-05-07 20:24:34", "lsp": "121"], ["id": 1615, "name": "PSLV  | RISAT-2B", "windowstart": "2019-05-21 23:30:00", "windowend": "2019-05-21 23:59:00", "net": "May 21, 2019 23:30:00 UTC", "status": 1, "tbdtime": 0, "tbddate": 0, "probability": -1, "changed": "2019-05-07 18:03:10", "lsp": "31"], ["id": 1679, "name": "Soyuz 2.1b/Fregat | Glonass-M", "windowstart": "2019-05-27 00:00:00", "windowend": "2019-05-27 00:00:00", "net": "May 27, 2019 00:00:00 UTC", "status": 2, "tbdtime": 1, "tbddate": 1, "probability": -1, "changed": "2019-04-28 11:46:20", "lsp": "193"], ["id": 1659, "name": "Kuaizhou-1A | Unknown", "windowstart": "2019-05-30 00:00:00", "windowend": "2019-05-30 00:00:00", "net": "May 30, 2019 00:00:00 UTC", "status": 2, "tbdtime": 1, "tbddate": 1, "probability": -1, "changed": "2019-04-18 07:47:45", "lsp": "194"], ["id": 1661, "name": "Soyuz 2.1a/Fregat | Meridian-M 18", "windowstart": "2019-05-30 00:00:00", "windowend": "2019-05-30 00:00:00", "net": "May 30, 2019 00:00:00 UTC", "status": 2, "tbdtime": 1, "tbddate": 1, "probability": -1, "changed": "2019-04-03 09:29:39","lsp": "193"]]
+    
+    override func reloadAllRocketLaunches() {
+        let launches = rocketLaunchesJSON.compactMap { RocketLaunch(JSON: $0) }
+        updateLaunches(launches, isFullyLoaded: false, deleteOld: true)
     }
     
-    let page1JSON: [String: Any] = ["launches":[["id":1831,"name":"Molniya 8K78 | Venera-1VA 2","windowstart":"1961-02-12 00:43:46","windowend":"1961-02-12 00:43:46","net":"February 12, 1961 00:43:46 UTC","status":3,"inhold":0,"tbdtime":0,"holdreason":"","failreason":"","tbddate":0,"probability":0,"hashtag":"","changed":"2019-03-23 22:40:18","lsp":"270"],["id":1832,"name":"Scout X-1 | Explorer 9","windowstart":"1961-02-16 13:05:00","windowend":"1961-02-16 13:05:00","net":"February 16, 1961 13:05:00 UTC","status":3,"inhold":0,"tbdtime":0,"holdreason":"","failreason":"","tbddate":0,"probability":0,"hashtag":"","changed":"2019-03-23 22:40:18","lsp":"44"]],"total":3,"offset":0,"count":2]
-    
-    let page2JSON: [String: Any] = ["launches":[["id":1833,"name":"Thor DM-21 Agena-B | Discoverer 20","windowstart":"1961-02-17 20:25:02","windowend":"1961-02-17 20:25:02","net":"February 17, 1961 20:25:02 UTC","status":3,"inhold":0,"tbdtime":0,"holdreason":"","failreason":"","tbddate":0,"probability":0,"hashtag":"","changed":"2019-03-23 22:40:18","lsp":"161"]],"total":3,"offset":2,"count":1]
-    
-    let pageThorJSON: [String: Any] = ["launches":[["id":1833,"name":"Thor DM-21 Agena-B | Discoverer 20","windowstart":"1961-02-17 20:25:02","windowend":"1961-02-17 20:25:02","net":"February 17, 1961 20:25:02 UTC","status":3,"inhold":0,"tbdtime":0,"holdreason":"","failreason":"","tbddate":0,"probability":0,"hashtag":"","changed":"2019-03-23 22:40:18","lsp":"161"]],"total":1,"offset":0,"count":1]
+    override func loadRocketLaunchDetails(ids: [Int]) -> Observable<Void> {
+        return Observable.create { observer -> Disposable in
+            let launches = self.rocketLaunchDetailsJSON.compactMap { RocketLaunch(JSON: $0) }.filter { ids.contains($0.id) }
+            self.updateLaunches(launches, isFullyLoaded: true, deleteOld: false)
+            
+            observer.onNext(())
+            observer.onCompleted()
+            
+            return Disposables.create()
+        }
+    }
 }

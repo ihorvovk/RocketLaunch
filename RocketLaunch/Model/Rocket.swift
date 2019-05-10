@@ -6,16 +6,25 @@
 //  Copyright © 2019 Ihor Vovk. All rights reserved.
 //
 
+import RealmSwift
 import ObjectMapper
 
-class Rocket: Mappable {
+final class Rocket: Object {
     
-    var id: Int?
-    var name: String?
-    var imageURL: String?
-    var wikiURL: String?
+    @objc dynamic var id: Int = 0
+    @objc dynamic var name: String?
+    @objc dynamic var imageURL: String?
+    @objc dynamic var wikiURL: String?
     
-    required init?(map: Map) {
+    override class func primaryKey() -> String? {
+        return "id"
+    }
+}
+
+extension Rocket: Mappable {
+    
+    convenience init?(map: Map) {
+        self.init()
     }
     
     func mapping(map: Map) {

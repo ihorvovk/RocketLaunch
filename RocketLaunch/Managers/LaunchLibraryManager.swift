@@ -11,49 +11,43 @@ import RxAlamofire
 import AlamofireObjectMapper
 import RxSwift
 import CocoaLumberjackSwift
+import RealmSwift
 
 class LaunchLibraryManager {
     
-    var favorites: [Int] { return favoritesVariable.value }
-    var favoritesObservable: Observable<[Int]> { return favoritesVariable.asObservable() }
-    
-    init() {
-        favoritesVariable = Variable<[Int]>(UserDefaults.standard.array(forKey: favoritesKey) as? [Int] ?? [])
+    init(realm: Realm) {
+        self.realm = realm
+        if realm.objects(RocketLaunch.self).count == 0 {
+            reloadAllRocketLaunches()
+        }
     }
     
-    func loadRocketLaunches(offset: Int? = nil, limit: Int? = nil, ids: [Int]? = nil, name: String? = nil) -> Observable<RocketLaunchPage> {
+    func reloadAllRocketLaunches() {
+        let parameters: [String: Any] = ["mode": "list", "sort": "desc", "fields": "id,name", "limit": 1000000]
+        Alamofire.request(URL(string: "https://launchlibrary.net/1.4/launch")!, parameters: parameters).validate().responseArray(keyPath: "launches") { [weak self] (response: DataResponse<[RocketLaunch]>) in
+            switch response.result {
+            case .success(let result):
+                DDLogInfo("Successfully loaded rocket launch ids")
+                self?.updateLaunches(result, isFullyLoaded: false, deleteOld: true)
+            case .failure(let error):
+                DDLogError("Failed to load rocket launch ids - \(error)")
+            }
+        }
+    }
+    
+    func loadRocketLaunchDetails(ids: [Int]) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
-            var parameters: [String : Any] = ["mode": "verbose"]
-            if let offset = offset {
-                parameters["offset"] = offset
-            }
-            
-            if let limit = limit {
-                parameters["limit"] = limit
-            }
-            
-            if let ids = ids {
-                parameters["id"] = ids.map { "\($0)" }.joined(separator: ",")
-            }
-            
-            if let name = name {
-                parameters["name"] = name
-            }
-            
-            let mapContext = RocketLaunchMapContext(launchLibraryManager: self)
-            
-            Alamofire.request(URL(string: "https://launchlibrary.net/1.4/launch")!, parameters: parameters).validate().responseObject(context: mapContext) { (response: DataResponse<RocketLaunchPage>) in
+            let parameters: [String: Any] = ["mode": "verbose", "id": ids.map { "\($0)" }.joined(separator: ",")]
+            Alamofire.request(URL(string: "https://launchlibrary.net/1.4/launch")!, parameters: parameters).validate().responseArray(keyPath: "launches") { [weak self] (response: DataResponse<[RocketLaunch]>) in
                 switch response.result {
                 case .success(let result):
                     DDLogInfo("Successfully loaded rocket launches")
-                    if let offset = offset, let limit = limit {
-                        result.page = offset / limit
-                    }
+                    self?.updateLaunches(result, isFullyLoaded: true, deleteOld: false)
                     
-                    observer.onNext(result)
+                    observer.onNext(())
                     observer.onCompleted()
                 case .failure(let error):
-                    DDLogError("Failed to load rocket launches")
+                    DDLogError("Failed to load rocket launches - \(error)")
                     observer.onError(error)
                 }
             }
@@ -62,32 +56,28 @@ class LaunchLibraryManager {
         }
     }
     
-    func setLaunch(_ launch: RocketLaunch, isFavorite: Bool) {
-        guard let id = launch.id else { return }
+    // MARK: Implementation
+    
+    let realm: Realm
+    
+    func updateLaunches(_ launches: [RocketLaunch], isFullyLoaded: Bool, deleteOld: Bool) {
+        let favoriteIDs = Array(realm.objects(RocketLaunch.self)).filter { $0.isFavorite }.map { $0.id }
         
-        var favorites = UserDefaults.standard.array(forKey: favoritesKey) as? [Int] ?? []
-        if isFavorite && !favorites.contains(where: { $0 == id }) {
-            favorites.append(id)
-        } else if !isFavorite {
-            favorites.removeAll { $0 == id }
+        launches.forEach { launch in
+            launch.isFavorite = favoriteIDs.contains(launch.id)
+            launch.isFullyLoaded = isFullyLoaded
         }
         
-        UserDefaults.standard.set(favorites, forKey: favoritesKey)
-        UserDefaults.standard.synchronize()
-        
-        favoritesVariable.value = favorites
-    }
-    
-    func isLaunchFavorite(_ launch: RocketLaunch) -> Bool {
-        if let id = launch.id {
-            return favoritesVariable.value.contains(id)
-        } else {
-            return false
+        do {
+            try realm.write {
+                if deleteOld {
+                    realm.deleteAll()
+                }
+                
+                realm.add(launches, update: true)
+            }
+        } catch {
+            DDLogError("Failed to write rocket launches to realm")
         }
     }
-    
-    // MARK: - Implementation
-    
-    private let favoritesKey = "favorites"
-    private let favoritesVariable: Variable<[Int]>
 }

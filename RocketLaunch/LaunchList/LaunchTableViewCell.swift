@@ -23,25 +23,28 @@ class LaunchTableViewCell: UITableViewCell {
         thumbnailImageView.af_cancelImageRequest()
     }
     
-    func fill(rocketLaunch: RocketLaunch?, delegate: LaunchTableViewCellDelegate) {
-        launchID = rocketLaunch?.id
-        nameLabel.text = rocketLaunch?.name
+    func fill(rocketLaunch: RocketLaunch, delegate: LaunchTableViewCellDelegate) {
+        launchID = rocketLaunch.id
+        nameLabel.text = rocketLaunch.name
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
         
-        if let windowStart = rocketLaunch?.windowStart {
-            launchTimeLabel.text = dateFormatter.string(from: windowStart)
+        if let net = rocketLaunch.net {
+            launchTimeLabel.text = dateFormatter.string(from: net)
         } else {
             launchTimeLabel.text = nil
         }
         
-        countryLabel.text = rocketLaunch?.country
-        statusLabel.text = rocketLaunch?.statusDescription
+        countryLabel.text = rocketLaunch.country
+        statusLabel.text = rocketLaunch.statusDescription
         
-        activityIndicatorView.isHidden = (rocketLaunch != nil)
+        launchTimeView.isHidden = !rocketLaunch.isFullyLoaded
+        countryView.isHidden = !rocketLaunch.isFullyLoaded
+        statusView.isHidden = !rocketLaunch.isFullyLoaded
+        activityIndicatorView.isHidden = rocketLaunch.isFullyLoaded
         
-        if let thumbnailURLString = rocketLaunch?.rocket?.imageURL, let thumbnailURL = URL(string: thumbnailURLString) {
+        if let thumbnailURLString = rocketLaunch.rocket?.imageURL, let thumbnailURL = URL(string: thumbnailURLString) {
             thumbnailImageView.af_setImage(withURL: thumbnailURL) { [weak self] response in
                 if response.error != nil {
                     self?.thumbnailImageView.image = UIImage(named: "rocket")
@@ -51,7 +54,7 @@ class LaunchTableViewCell: UITableViewCell {
             thumbnailImageView.image = UIImage(named: "rocket")
         }
         
-        favoriteButton.isSelected = rocketLaunch?.isFavorite ?? false
+        favoriteButton.isSelected = rocketLaunch.isFavorite
         
         self.delegate = delegate
     }
@@ -60,8 +63,11 @@ class LaunchTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var thumbnailImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var launchTimeView: UIStackView!
     @IBOutlet private weak var launchTimeLabel: UILabel!
+    @IBOutlet private weak var countryView: UIStackView!
     @IBOutlet private weak var countryLabel: UILabel!
+    @IBOutlet private weak var statusView: UIStackView!
     @IBOutlet private weak var statusLabel: UILabel!
     @IBOutlet private weak var favoriteButton: UIButton!
     @IBOutlet private weak var activityIndicatorView: UIView!

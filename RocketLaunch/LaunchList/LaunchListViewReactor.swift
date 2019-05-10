@@ -9,141 +9,123 @@
 import Foundation
 import ReactorKit
 import RxSwift
-import PagedArray
+import RealmSwift
 
 class LaunchListViewReactor: Reactor {
     
     enum Action {
-        case fetchLaunches(indexPaths: [IndexPath])
+        case fetchLaunches(indexes: [Int])
         case setLaunch(index: Int, isFavorite: Bool)
         case search(String?)
         case reload
     }
     
     enum Mutation {
-        case setLaunchPage(RocketLaunchPage, reset: Bool)
-        case setSearchName(String?)
-        case refreshLaunches
-        case resetLaunches
+        case setLaunch(index: Int, isFavorite: Bool)
+        case search(String?)
     }
     
     struct State {
-        var launches: PagedArray<RocketLaunch>?
+        var launches: Results<RocketLaunch>
         var searchName: String?
     }
     
-    let initialState = State()
-    
-    var launchIDFilter: [Int]? {
-        return nil
-    }
+    let initialState: State
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-        case .fetchLaunches(indexPaths: let indexPaths):
-            return mutateFetchLaunches(indexPaths: indexPaths)
+        case .fetchLaunches(indexes: let indexes):
+            return mutateFetchLaunches(indexes: indexes)
         case .setLaunch(index: let index, isFavorite: let isFavorite):
-            return mutateSetLaunch(index: index, isFavorite: isFavorite)
+            return Observable.just(Mutation.setLaunch(index: index, isFavorite: isFavorite))
         case .search(let name):
-            return mutateSearch(name: name)
+            return Observable.just(Mutation.search(name))
         case .reload:
             return mutateReload()
         }
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
-        var result = state
-        
         switch mutation {
-        case .setLaunchPage(let launchPage, let reset):
-            return reduceSetLaunchPage(launchPage, reset: reset, state: state)
-        case .setSearchName(let name):
-            result.searchName = name
-        case .refreshLaunches:
-            break
-        case .resetLaunches:
-            result.launches = nil
+        case .setLaunch(let index, let isFavorite):
+            return reduceSetLaunch(index: index, isFavorite: isFavorite, state: state)
+        case .search(let name):
+            return reduceSearch(name: name, state: state)
         }
-        
-        return result
     }
     
-    func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
-        let updateFavorites = launchLibraryManager.favoritesObservable.flatMap { [weak self] favorites -> Observable<Mutation> in
-            var result = Observable.just(Mutation.refreshLaunches)
-            if let `self` = self, self.launchIDFilter != nil {
-                result = result.concat(self.mutateReload())
-            }
-            
-            return result
-        }
-        
-        return Observable.merge(mutateFetchLaunches(indexPaths: [IndexPath(row: 0, section: 0)]), updateFavorites, mutation)
-    }
-    
-    init(launchLibraryManager: LaunchLibraryManager, loadLimit: Int) {
+    init(realm: Realm, launchLibraryManager: LaunchLibraryManager, loadLimit: Int, filter: String?) {
+        self.realm = realm
         self.launchLibraryManager = launchLibraryManager
         self.loadLimit = loadLimit
+        self.filter = filter
+        
+        var launches = realm.objects(RocketLaunch.self)
+        if let filter = filter {
+            launches = launches.filter(filter)
+        }
+        
+        initialState = State(launches: launches, searchName: nil)
     }
     
     // MARK: - Implementation
     
-    let launchLibraryManager: LaunchLibraryManager
+    private let realm: Realm
+    private let launchLibraryManager: LaunchLibraryManager
     private let loadLimit: Int
-    private var pagesLoading: Set<Int> = []
+    private let filter: String?
+    private var loadingIndexes: Set<Int> = []
     
-    private func mutateFetchLaunches(indexPaths: [IndexPath]) -> Observable<Mutation> {
-        let pages = Set(indexPaths.map { $0.row / loadLimit }).filter { page -> Bool in
-            return currentState.launches?.elements[page] == nil && !pagesLoading.contains(page)
+    private func mutateFetchLaunches(indexes: [Int]) -> Observable<Mutation> {
+        guard !loadingIndexes.isSuperset(of: indexes) else { return Observable.empty() }
+        
+        var indexes = indexes
+        if indexes.count < loadLimit, let lastIndex = indexes.last, lastIndex < currentState.launches.count {
+            indexes += Array(lastIndex + 1 ..< min(lastIndex + loadLimit, currentState.launches.count))
         }
         
-        if pages.count > 0 {
-            return Observable.merge(pages.map { page in
-                pagesLoading.insert(page)
-                return launchLibraryManager.loadRocketLaunches(offset: page * loadLimit, limit: loadLimit, ids: launchIDFilter, name: currentState.searchName).do(onCompleted: { [weak self] in
-                    self?.pagesLoading.remove(page)
-                }).catchError { _ in Observable.empty() }
-            }).map { Mutation.setLaunchPage($0, reset: false) }
+        let ids: [Int] = indexes.compactMap { index in
+            let launch = currentState.launches[index]
+            return launch.isFullyLoaded ? nil : launch.id
+        }
+        
+        if ids.count > 0 {
+            loadingIndexes.formUnion(indexes)
+            return launchLibraryManager.loadRocketLaunchDetails(ids: ids).do(onCompleted: { [weak self] in
+                self?.loadingIndexes.subtract(indexes)
+            }).flatMap { Observable.empty() }
         } else {
             return Observable.empty()
         }
     }
     
-    private func mutateSetLaunch(index: Int, isFavorite: Bool) -> Observable<Mutation> {
-        guard let launch = currentState.launches?[index] else { return Observable.empty() }
-        
-        launchLibraryManager.setLaunch(launch, isFavorite: isFavorite)
+    private func mutateReload() -> Observable<Mutation> {
+        launchLibraryManager.reloadAllRocketLaunches()
         return Observable.empty()
     }
     
-    private func mutateSearch(name: String?) -> Observable<Mutation> {
-        var searchName: String?
+    private func reduceSetLaunch(index: Int, isFavorite: Bool, state: State) -> State {
+        let launch = state.launches[index]
+        try? launch.realm?.write {
+            launch.isFavorite = isFavorite
+        }
+    
+        return state
+    }
+    
+    private func reduceSearch(name: String?, state: State) -> State {
+        var launches = realm.objects(RocketLaunch.self)
+        if let filter = filter {
+            launches = launches.filter(filter)
+        }
+        
         if let name = name, name.count >= 3 {
-            searchName = name
-        } else {
-            searchName = nil
+            launches = launches.filter("name CONTAINS '\(name)'")
         }
         
-        return Observable.concat(Observable.just(Mutation.setSearchName(name)), launchLibraryManager.loadRocketLaunches(offset: 0, limit: loadLimit, ids: launchIDFilter, name: searchName).flatMap { launchPage -> Observable<Mutation> in
-            return Observable.just(Mutation.setLaunchPage(launchPage, reset: true))
-        }).catchErrorJustReturn(Mutation.resetLaunches)
-    }
-    
-    private func mutateReload() -> Observable<Mutation> {
-        return launchLibraryManager.loadRocketLaunches(offset: 0, limit: loadLimit, ids: launchIDFilter).flatMap { launchPage -> Observable<Mutation> in
-            return Observable.just(Mutation.setLaunchPage(launchPage, reset: true))
-        }.catchErrorJustReturn(Mutation.resetLaunches)
-    }
-    
-    private func reduceSetLaunchPage(_ launchPage: RocketLaunchPage, reset: Bool, state: State) -> State {
         var result = state
-        if result.launches == nil || reset, let total = launchPage.total {
-            result.launches = PagedArray(count: total, pageSize: loadLimit)
-        }
-        
-        if let page = launchPage.page, let launches = launchPage.launches {
-            result.launches?.set(launches, forPage: page)
-        }
+        result.launches = launches
+        result.searchName = name
         
         return result
     }

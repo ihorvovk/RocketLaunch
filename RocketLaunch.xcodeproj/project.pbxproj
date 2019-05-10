@@ -12,12 +12,14 @@
 		FD145B07227F767E007E75EB /* LaunchInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD145B06227F767E007E75EB /* LaunchInfo.storyboard */; };
 		FD145B09227F76CC007E75EB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD145B08227F76CC007E75EB /* Coordinator.swift */; };
 		FD145B0B227F8370007E75EB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD145B0A227F836F007E75EB /* WebKit.framework */; };
-		FD145B0D22816791007E75EB /* FavoriteLaunchListViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD145B0C22816791007E75EB /* FavoriteLaunchListViewReactor.swift */; };
 		FD14C2F92282F3BB00154D5F /* LaunchLibraryManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14C2F82282F3BB00154D5F /* LaunchLibraryManagerMock.swift */; };
 		FD14C2FB2282F45500154D5F /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD61A9D22279C9F800264EC3 /* RxSwift.framework */; };
-		FD1F1FB6227E313C007C83B1 /* PagedArray.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1F1FB4227E3128007C83B1 /* PagedArray.framework */; };
-		FD1F1FB7227E313C007C83B1 /* PagedArray.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD1F1FB4227E3128007C83B1 /* PagedArray.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FD1F1FB9227ED7F4007C83B1 /* RocketLaunchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1F1FB8227ED7F4007C83B1 /* RocketLaunchPage.swift */; };
+		FD1AF6A422845633003B08A8 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1AF6A122845622003B08A8 /* RealmSwift.framework */; };
+		FD1AF6A522845633003B08A8 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD1AF6A122845622003B08A8 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FD1AF6A622845633003B08A8 /* RxRealm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1AF6A022845622003B08A8 /* RxRealm.framework */; };
+		FD1AF6A722845633003B08A8 /* RxRealm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD1AF6A022845622003B08A8 /* RxRealm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FD1AF6AA22849284003B08A8 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1AF6A822849274003B08A8 /* Realm.framework */; };
+		FD1AF6AB22849284003B08A8 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD1AF6A822849274003B08A8 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FD1F1FBB227F13E7007C83B1 /* Rocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1F1FBA227F13E7007C83B1 /* Rocket.swift */; };
 		FD1F1FBE227F188C007C83B1 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1F1FBC227F1875007C83B1 /* AlamofireImage.framework */; };
 		FD1F1FBF227F188C007C83B1 /* AlamofireImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD1F1FBC227F1875007C83B1 /* AlamofireImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -51,6 +53,8 @@
 		FD61AA0C2279E20600264EC3 /* LaunchLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61AA0B2279E20600264EC3 /* LaunchLibraryManager.swift */; };
 		FD61AA0F227AE03D00264EC3 /* RxAlamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD61AA0D227AE02300264EC3 /* RxAlamofire.framework */; };
 		FD61AA10227AE03D00264EC3 /* RxAlamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD61AA0D227AE02300264EC3 /* RxAlamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FDFC83F02285388C00175176 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1AF6A122845622003B08A8 /* RealmSwift.framework */; };
+		FDFC83F22285465700175176 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFC83F12285465700175176 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,11 +80,13 @@
 				FD1F1FBF227F188C007C83B1 /* AlamofireImage.framework in Embed Frameworks */,
 				FD61A9F52279CEA500264EC3 /* CocoaLumberjackSwift.framework in Embed Frameworks */,
 				FD61AA002279D0D000264EC3 /* CocoaLumberjack.framework in Embed Frameworks */,
+				FD1AF6A722845633003B08A8 /* RxRealm.framework in Embed Frameworks */,
 				FD61A9FB2279CEA500264EC3 /* RxSwift.framework in Embed Frameworks */,
 				FD61A9EF2279CEA500264EC3 /* ReactorKit.framework in Embed Frameworks */,
 				FD61A9F72279CEA500264EC3 /* ObjectMapper.framework in Embed Frameworks */,
-				FD1F1FB7227E313C007C83B1 /* PagedArray.framework in Embed Frameworks */,
+				FD1AF6A522845633003B08A8 /* RealmSwift.framework in Embed Frameworks */,
 				FD61A9F32279CEA500264EC3 /* AlamofireObjectMapper.framework in Embed Frameworks */,
+				FD1AF6AB22849284003B08A8 /* Realm.framework in Embed Frameworks */,
 				FD61A9F12279CEA500264EC3 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -92,10 +98,10 @@
 		FD145B06227F767E007E75EB /* LaunchInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchInfo.storyboard; sourceTree = "<group>"; };
 		FD145B08227F76CC007E75EB /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		FD145B0A227F836F007E75EB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		FD145B0C22816791007E75EB /* FavoriteLaunchListViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteLaunchListViewReactor.swift; sourceTree = "<group>"; };
 		FD14C2F82282F3BB00154D5F /* LaunchLibraryManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchLibraryManagerMock.swift; sourceTree = "<group>"; };
-		FD1F1FB4227E3128007C83B1 /* PagedArray.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PagedArray.framework; path = Carthage/Build/iOS/PagedArray.framework; sourceTree = "<group>"; };
-		FD1F1FB8227ED7F4007C83B1 /* RocketLaunchPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketLaunchPage.swift; sourceTree = "<group>"; };
+		FD1AF6A022845622003B08A8 /* RxRealm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRealm.framework; path = Carthage/Build/iOS/RxRealm.framework; sourceTree = "<group>"; };
+		FD1AF6A122845622003B08A8 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		FD1AF6A822849274003B08A8 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		FD1F1FBA227F13E7007C83B1 /* Rocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rocket.swift; sourceTree = "<group>"; };
 		FD1F1FBC227F1875007C83B1 /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = Carthage/Build/iOS/AlamofireImage.framework; sourceTree = "<group>"; };
 		FD1F1FC2227F49CF007C83B1 /* LaunchInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchInfoViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +130,7 @@
 		FD61AA092279E0D200264EC3 /* RocketLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketLaunch.swift; sourceTree = "<group>"; };
 		FD61AA0B2279E20600264EC3 /* LaunchLibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchLibraryManager.swift; sourceTree = "<group>"; };
 		FD61AA0D227AE02300264EC3 /* RxAlamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxAlamofire.framework; path = Carthage/Build/iOS/RxAlamofire.framework; sourceTree = "<group>"; };
+		FDFC83F12285465700175176 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,18 +138,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD1AF6AA22849284003B08A8 /* Realm.framework in Frameworks */,
 				FD145B0B227F8370007E75EB /* WebKit.framework in Frameworks */,
 				FD61A9F82279CEA500264EC3 /* RxCocoa.framework in Frameworks */,
 				FD61AA0F227AE03D00264EC3 /* RxAlamofire.framework in Frameworks */,
 				FD61AA032279D0FF00264EC3 /* ReactorKitRuntime.framework in Frameworks */,
 				FD1F1FBE227F188C007C83B1 /* AlamofireImage.framework in Frameworks */,
+				FD1AF6A622845633003B08A8 /* RxRealm.framework in Frameworks */,
 				FD61A9F42279CEA500264EC3 /* CocoaLumberjackSwift.framework in Frameworks */,
 				FD61A9FF2279D0D000264EC3 /* CocoaLumberjack.framework in Frameworks */,
 				FD61A9FA2279CEA500264EC3 /* RxSwift.framework in Frameworks */,
 				FD61A9EE2279CEA500264EC3 /* ReactorKit.framework in Frameworks */,
 				FD61A9F62279CEA500264EC3 /* ObjectMapper.framework in Frameworks */,
-				FD1F1FB6227E313C007C83B1 /* PagedArray.framework in Frameworks */,
 				FD61A9F22279CEA500264EC3 /* AlamofireObjectMapper.framework in Frameworks */,
+				FD1AF6A422845633003B08A8 /* RealmSwift.framework in Frameworks */,
 				FD61A9F02279CEA500264EC3 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,6 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDFC83F02285388C00175176 /* RealmSwift.framework in Frameworks */,
 				FD14C2FB2282F45500154D5F /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,7 +181,6 @@
 			children = (
 				FD1F1FBA227F13E7007C83B1 /* Rocket.swift */,
 				FD61AA092279E0D200264EC3 /* RocketLaunch.swift */,
-				FD1F1FB8227ED7F4007C83B1 /* RocketLaunchPage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -180,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				FD61AA0B2279E20600264EC3 /* LaunchLibraryManager.swift */,
+				FDFC83F12285465700175176 /* DataManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -189,7 +199,6 @@
 			children = (
 				FD61A9AF2279BFA700264EC3 /* LaunchListViewController.swift */,
 				FD61AA052279D30B00264EC3 /* LaunchListViewReactor.swift */,
-				FD145B0C22816791007E75EB /* FavoriteLaunchListViewReactor.swift */,
 				FD61AA072279DEA900264EC3 /* LaunchTableViewCell.swift */,
 			);
 			path = LaunchList;
@@ -254,9 +263,11 @@
 		FD61A9D02279C9C300264EC3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD1AF6A822849274003B08A8 /* Realm.framework */,
+				FD1AF6A122845622003B08A8 /* RealmSwift.framework */,
+				FD1AF6A022845622003B08A8 /* RxRealm.framework */,
 				FD145B0A227F836F007E75EB /* WebKit.framework */,
 				FD1F1FBC227F1875007C83B1 /* AlamofireImage.framework */,
-				FD1F1FB4227E3128007C83B1 /* PagedArray.framework */,
 				FD61AA0D227AE02300264EC3 /* RxAlamofire.framework */,
 				FD61AA012279D0F200264EC3 /* ReactorKitRuntime.framework */,
 				FD61A9FD2279D0BF00264EC3 /* CocoaLumberjack.framework */,
@@ -376,9 +387,8 @@
 			files = (
 				FD1F1FBB227F13E7007C83B1 /* Rocket.swift in Sources */,
 				FD145B05227F763D007E75EB /* LaunchInfoViewReactor.swift in Sources */,
+				FDFC83F22285465700175176 /* DataManager.swift in Sources */,
 				FD61AA0A2279E0D200264EC3 /* RocketLaunch.swift in Sources */,
-				FD1F1FB9227ED7F4007C83B1 /* RocketLaunchPage.swift in Sources */,
-				FD145B0D22816791007E75EB /* FavoriteLaunchListViewReactor.swift in Sources */,
 				FD61A9AE2279BFA700264EC3 /* AppDelegate.swift in Sources */,
 				FD145B04227F7639007E75EB /* LaunchInfoViewController.swift in Sources */,
 				FD61AA082279DEA900264EC3 /* LaunchTableViewCell.swift in Sources */,

@@ -7,56 +7,68 @@
 //
 
 import XCTest
+import RealmSwift
+
 @testable import RocketLaunch
 
 class LaunchListViewReactorTests: XCTestCase {
     
+    var realm: Realm!
+    var reactor: LaunchListViewReactor!
+    
     override func setUp() {
+        realm = try! Realm(configuration: Realm.Configuration(fileURL: nil, inMemoryIdentifier: "test", encryptionKey: nil, readOnly: false, schemaVersion: 0, migrationBlock: nil, objectTypes: nil))
+        reactor = LaunchListViewReactor(realm: realm, launchLibraryManager: LaunchLibraryManagerMock(realm: realm), loadLimit: 2, filter: nil)
     }
 
     override func tearDown() {
     }
 
     func testFetchLaunches() {
-        let reactor = LaunchListViewReactor(launchLibraryManager: LaunchLibraryManagerMock(), loadLimit: 2)
+        XCTAssertEqual(reactor.currentState.launches.count, 5)
+        XCTAssertEqual(reactor.currentState.launches[0].isFullyLoaded, false)
+        
+        reactor.action.onNext(.fetchLaunches(indexes: [0]))
+        XCTAssertEqual(reactor.currentState.launches.count, 5)
+        XCTAssertEqual(reactor.currentState.launches[0].isFullyLoaded, true)
+        XCTAssertEqual(reactor.currentState.launches[1].isFullyLoaded, true)
+        XCTAssertEqual(reactor.currentState.launches[4].isFullyLoaded, false)
 
-        reactor.action.onNext(.fetchLaunches(indexPaths: [IndexPath(row: 0, section: 0)]))
-        XCTAssertNotNil(reactor.currentState.launches)
-        XCTAssertEqual(reactor.currentState.launches?.count, 3)
-        XCTAssertEqual(reactor.currentState.launches?.loadedElements.count, 2)
-
-        reactor.action.onNext(.fetchLaunches(indexPaths: [IndexPath(row: 2, section: 0)]))
-        XCTAssertEqual(reactor.currentState.launches?.count, 3)
-        XCTAssertEqual(reactor.currentState.launches?.loadedElements.count, 3)
+        reactor.action.onNext(.fetchLaunches(indexes: [4]))
+        XCTAssertEqual(reactor.currentState.launches[4].isFullyLoaded, true)
     }
 
     func testSetLaunchFavorite() {
-        let reactor = LaunchListViewReactor(launchLibraryManager: LaunchLibraryManagerMock(), loadLimit: 2)
-        reactor.action.onNext(.fetchLaunches(indexPaths: [IndexPath(row: 0, section: 0)]))
-
         reactor.action.onNext(.setLaunch(index: 1, isFavorite: false))
-        XCTAssertEqual(reactor.currentState.launches?[1]?.isFavorite, false)
+        XCTAssertEqual(reactor.currentState.launches[1].isFavorite, false)
 
         reactor.action.onNext(.setLaunch(index: 1, isFavorite: true))
-        XCTAssertEqual(reactor.currentState.launches?[1]?.isFavorite, true)
+        XCTAssertEqual(reactor.currentState.launches[1].isFavorite, true)
+        
+        reactor.action.onNext(.fetchLaunches(indexes: [1]))
+        XCTAssertEqual(reactor.currentState.launches[1].isFavorite, true)
+        
+        reactor.action.onNext(.reload)
+        XCTAssertEqual(reactor.currentState.launches[1].isFavorite, true)
     }
     
     func testSearch() {
-        let reactor = LaunchListViewReactor(launchLibraryManager: LaunchLibraryManagerMock(), loadLimit: 2)
+        reactor.action.onNext(.search("So"))
+        XCTAssertEqual(reactor.currentState.launches.count, 5)
         
-        reactor.action.onNext(.search("Thor"))
-        XCTAssertEqual(reactor.currentState.searchName, "Thor")
-        XCTAssertEqual(reactor.currentState.launches?.count, 1)
-        XCTAssertEqual(reactor.currentState.launches?[0]?.name, "Thor DM-21 Agena-B | Discoverer 20")
+        reactor.action.onNext(.search("Soyu"))
+        XCTAssertEqual(reactor.currentState.launches.count, 2)
+        
+        reactor.action.onNext(.search("Falc"))
+        XCTAssertEqual(reactor.currentState.launches.count, 1)
+        XCTAssertEqual(reactor.currentState.launches[0].name, "Falcon 9 Block 5 | Starlink")
     }
     
     func testReload() {
-        let reactor = LaunchListViewReactor(launchLibraryManager: LaunchLibraryManagerMock(), loadLimit: 2)
-        
-        reactor.action.onNext(.fetchLaunches(indexPaths: [IndexPath(row: 2, section: 0)]))
-        XCTAssertEqual(reactor.currentState.launches?.loadedElements.count, 3)
+        reactor.action.onNext(.fetchLaunches(indexes: [0]))
+        XCTAssertEqual(reactor.currentState.launches[0].isFullyLoaded, true)
         
         reactor.action.onNext(.reload)
-        XCTAssertEqual(reactor.currentState.launches?.loadedElements.count, 2)
+        XCTAssertEqual(reactor.currentState.launches[0].isFullyLoaded, false)
     }
 }
