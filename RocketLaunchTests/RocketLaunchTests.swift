@@ -13,12 +13,11 @@ import RealmSwift
 
 class LaunchListViewReactorTests: XCTestCase {
     
-    var realm: Realm!
     var reactor: LaunchListViewReactor!
     
     override func setUp() {
-        realm = try! Realm(configuration: Realm.Configuration(fileURL: nil, inMemoryIdentifier: "test", encryptionKey: nil, readOnly: false, schemaVersion: 0, migrationBlock: nil, objectTypes: nil))
-        reactor = LaunchListViewReactor(realm: realm, launchLibraryManager: LaunchLibraryManagerMock(realm: realm), loadLimit: 2, filter: nil)
+        let realmManager = RealmManagerMock()
+        reactor = LaunchListViewReactor(launchLibraryManager: LaunchLibraryManagerMock(realmManager: realmManager), realmManager: realmManager, loadLimit: 2, filter: nil)
     }
 
     override func tearDown() {

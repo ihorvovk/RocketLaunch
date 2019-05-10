@@ -15,16 +15,16 @@ import RealmSwift
 
 class LaunchLibraryManager {
     
-    init(realm: Realm) {
-        self.realm = realm
-        if realm.objects(RocketLaunch.self).count == 0 {
+    init(realmManager: RealmManager) {
+        self.realmManager = realmManager
+        if realmManager.realm.objects(RocketLaunch.self).count == 0 {
             reloadAllRocketLaunches()
         }
     }
     
     func reloadAllRocketLaunches() {
         let parameters: [String: Any] = ["mode": "list", "sort": "desc", "fields": "id,name", "limit": 1000000]
-        Alamofire.request(LaunchLibraryManager.apiURL, parameters: parameters).validate().responseArray(keyPath: "launches") { [weak self] (response: DataResponse<[RocketLaunch]>) in
+        Alamofire.request(LaunchLibraryManager.apiURL, parameters: parameters).validate().responseArray(queue: DispatchQueue.global(qos: .userInitiated), keyPath: "launches") { [weak self] (response: DataResponse<[RocketLaunch]>) in
             switch response.result {
             case .success(let result):
                 DDLogDebug("Successfully loaded rocket launches")
@@ -38,7 +38,7 @@ class LaunchLibraryManager {
     func loadRocketLaunchDetails(ids: [Int]) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
             let parameters: [String: Any] = ["mode": "verbose", "id": ids.map { "\($0)" }.joined(separator: ",")]
-            Alamofire.request(LaunchLibraryManager.apiURL, parameters: parameters).validate().responseArray(keyPath: "launches") { [weak self] (response: DataResponse<[RocketLaunch]>) in
+            Alamofire.request(LaunchLibraryManager.apiURL, parameters: parameters).validate().responseArray(queue: DispatchQueue.global(qos: .userInitiated), keyPath: "launches") { [weak self] (response: DataResponse<[RocketLaunch]>) in
                 switch response.result {
                 case .success(let result):
                     DDLogDebug("Successfully loaded rocket launch details for ids: \(ids)")
@@ -58,10 +58,11 @@ class LaunchLibraryManager {
     
     // MARK: Implementation
     
-    private let realm: Realm
+    private let realmManager: RealmManager
     private static let apiURL = URL(string: "https://launchlibrary.net/1.4/launch")!
     
     func updateLaunches(_ launches: [RocketLaunch], isFullyLoaded: Bool, deleteOld: Bool) {
+        let realm = realmManager.realm
         let favoriteIDs = Array(realm.objects(RocketLaunch.self)).filter { $0.isFavorite }.map { $0.id }
         
         launches.forEach { launch in

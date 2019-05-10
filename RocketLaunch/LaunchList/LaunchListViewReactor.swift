@@ -54,13 +54,13 @@ class LaunchListViewReactor: Reactor {
         }
     }
     
-    init(realm: Realm, launchLibraryManager: LaunchLibraryManager, loadLimit: Int, filter: String?) {
-        self.realm = realm
+    init(launchLibraryManager: LaunchLibraryManager, realmManager: RealmManager, loadLimit: Int, filter: String?) {
         self.launchLibraryManager = launchLibraryManager
+        self.realmManager = realmManager
         self.loadLimit = loadLimit
         self.filter = filter
         
-        var launches = realm.objects(RocketLaunch.self)
+        var launches = realmManager.realm.objects(RocketLaunch.self)
         if let filter = filter {
             launches = launches.filter(filter)
         }
@@ -70,8 +70,8 @@ class LaunchListViewReactor: Reactor {
     
     // MARK: - Implementation
     
-    private let realm: Realm
     private let launchLibraryManager: LaunchLibraryManager
+    private let realmManager: RealmManager
     private let loadLimit: Int
     private let filter: String?
     private var loadingIndexes: Set<Int> = []
@@ -114,7 +114,7 @@ class LaunchListViewReactor: Reactor {
     }
     
     private func reduceSearch(name: String?, state: State) -> State {
-        var launches = realm.objects(RocketLaunch.self)
+        var launches = realmManager.realm.objects(RocketLaunch.self)
         if let filter = filter {
             launches = launches.filter(filter)
         }

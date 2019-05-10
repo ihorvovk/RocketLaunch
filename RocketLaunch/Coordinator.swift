@@ -7,28 +7,27 @@
 //
 
 import UIKit
-import RealmSwift
 
 class Coordinator {
     
-    let realm: Realm
+    let realmManager: RealmManager
     let launchLibraryManager: LaunchLibraryManager
     
     init(mainNavigationController: UINavigationController) {
-        realm = try! Realm()
-        launchLibraryManager = LaunchLibraryManager(realm: realm)
+        realmManager = RealmManager()
+        launchLibraryManager = LaunchLibraryManager(realmManager: realmManager)
         
         guard  let tabBarController = mainNavigationController.topViewController as? UITabBarController else { return }
         
         if let launchListViewController = tabBarController.viewControllers?.first as? LaunchListViewController {
             launchListViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 0)
-            launchListViewController.reactor = LaunchListViewReactor(realm: realm, launchLibraryManager: launchLibraryManager, loadLimit: 10, filter: nil)
+            launchListViewController.reactor = LaunchListViewReactor(launchLibraryManager: launchLibraryManager, realmManager: realmManager, loadLimit: 10, filter: nil)
             launchListViewController.delegate = self
         }
         
         if let favoriteLaunchListViewController = tabBarController.viewControllers?.last as? LaunchListViewController {
             favoriteLaunchListViewController.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
-            favoriteLaunchListViewController.reactor = LaunchListViewReactor(realm: realm, launchLibraryManager: launchLibraryManager, loadLimit: 10, filter: "isFavorite == true")
+            favoriteLaunchListViewController.reactor = LaunchListViewReactor(launchLibraryManager: launchLibraryManager, realmManager: realmManager, loadLimit: 10, filter: "isFavorite == true")
             favoriteLaunchListViewController.delegate = self
         }
     }

@@ -53,6 +53,8 @@
 		FD61AA0C2279E20600264EC3 /* LaunchLibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61AA0B2279E20600264EC3 /* LaunchLibraryManager.swift */; };
 		FD61AA0F227AE03D00264EC3 /* RxAlamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD61AA0D227AE02300264EC3 /* RxAlamofire.framework */; };
 		FD61AA10227AE03D00264EC3 /* RxAlamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD61AA0D227AE02300264EC3 /* RxAlamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FD9B1F1222857082007E8EBC /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9B1F1122857082007E8EBC /* RealmManager.swift */; };
+		FD9B1F142285718F007E8EBC /* RealmManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9B1F132285718F007E8EBC /* RealmManagerMock.swift */; };
 		FDFC83F02285388C00175176 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1AF6A122845622003B08A8 /* RealmSwift.framework */; };
 /* End PBXBuildFile section */
 
@@ -129,6 +131,8 @@
 		FD61AA092279E0D200264EC3 /* RocketLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketLaunch.swift; sourceTree = "<group>"; };
 		FD61AA0B2279E20600264EC3 /* LaunchLibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchLibraryManager.swift; sourceTree = "<group>"; };
 		FD61AA0D227AE02300264EC3 /* RxAlamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxAlamofire.framework; path = Carthage/Build/iOS/RxAlamofire.framework; sourceTree = "<group>"; };
+		FD9B1F1122857082007E8EBC /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		FD9B1F132285718F007E8EBC /* RealmManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManagerMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				FD14C2F82282F3BB00154D5F /* LaunchLibraryManagerMock.swift */,
+				FD9B1F132285718F007E8EBC /* RealmManagerMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -187,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				FD61AA0B2279E20600264EC3 /* LaunchLibraryManager.swift */,
+				FD9B1F1122857082007E8EBC /* RealmManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -384,6 +390,7 @@
 			files = (
 				FD1F1FBB227F13E7007C83B1 /* Rocket.swift in Sources */,
 				FD145B05227F763D007E75EB /* LaunchInfoViewReactor.swift in Sources */,
+				FD9B1F1222857082007E8EBC /* RealmManager.swift in Sources */,
 				FD61AA0A2279E0D200264EC3 /* RocketLaunch.swift in Sources */,
 				FD61A9AE2279BFA700264EC3 /* AppDelegate.swift in Sources */,
 				FD145B04227F7639007E75EB /* LaunchInfoViewController.swift in Sources */,
@@ -400,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD14C2F92282F3BB00154D5F /* LaunchLibraryManagerMock.swift in Sources */,
+				FD9B1F142285718F007E8EBC /* RealmManagerMock.swift in Sources */,
 				FD61A9C52279BFB700264EC3 /* RocketLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
