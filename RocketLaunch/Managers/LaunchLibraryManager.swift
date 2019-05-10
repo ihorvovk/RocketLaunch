@@ -24,13 +24,13 @@ class LaunchLibraryManager {
     
     func reloadAllRocketLaunches() {
         let parameters: [String: Any] = ["mode": "list", "sort": "desc", "fields": "id,name", "limit": 1000000]
-        Alamofire.request(URL(string: "https://launchlibrary.net/1.4/launch")!, parameters: parameters).validate().responseArray(keyPath: "launches") { [weak self] (response: DataResponse<[RocketLaunch]>) in
+        Alamofire.request(LaunchLibraryManager.apiURL, parameters: parameters).validate().responseArray(keyPath: "launches") { [weak self] (response: DataResponse<[RocketLaunch]>) in
             switch response.result {
             case .success(let result):
-                DDLogInfo("Successfully loaded rocket launch ids")
+                DDLogDebug("Successfully loaded rocket launches")
                 self?.updateLaunches(result, isFullyLoaded: false, deleteOld: true)
             case .failure(let error):
-                DDLogError("Failed to load rocket launch ids - \(error)")
+                DDLogError("Failed to load rocket launches - \(error)")
             }
         }
     }
@@ -38,16 +38,16 @@ class LaunchLibraryManager {
     func loadRocketLaunchDetails(ids: [Int]) -> Observable<Void> {
         return Observable.create { observer -> Disposable in
             let parameters: [String: Any] = ["mode": "verbose", "id": ids.map { "\($0)" }.joined(separator: ",")]
-            Alamofire.request(URL(string: "https://launchlibrary.net/1.4/launch")!, parameters: parameters).validate().responseArray(keyPath: "launches") { [weak self] (response: DataResponse<[RocketLaunch]>) in
+            Alamofire.request(LaunchLibraryManager.apiURL, parameters: parameters).validate().responseArray(keyPath: "launches") { [weak self] (response: DataResponse<[RocketLaunch]>) in
                 switch response.result {
                 case .success(let result):
-                    DDLogInfo("Successfully loaded rocket launches")
+                    DDLogDebug("Successfully loaded rocket launch details for ids: \(ids)")
                     self?.updateLaunches(result, isFullyLoaded: true, deleteOld: false)
                     
                     observer.onNext(())
                     observer.onCompleted()
                 case .failure(let error):
-                    DDLogError("Failed to load rocket launches - \(error)")
+                    DDLogError("Failed to load rocket launch details for ids: \(ids) - \(error)")
                     observer.onError(error)
                 }
             }
@@ -58,7 +58,8 @@ class LaunchLibraryManager {
     
     // MARK: Implementation
     
-    let realm: Realm
+    private let realm: Realm
+    private static let apiURL = URL(string: "https://launchlibrary.net/1.4/launch")!
     
     func updateLaunches(_ launches: [RocketLaunch], isFullyLoaded: Bool, deleteOld: Bool) {
         let favoriteIDs = Array(realm.objects(RocketLaunch.self)).filter { $0.isFavorite }.map { $0.id }

@@ -11,10 +11,6 @@ import RxSwift
 
 @testable import RocketLaunch
 
-enum LaunchLibraryManagerError: Error {
-    case error
-}
-
 class LaunchLibraryManagerMock: LaunchLibraryManager {
     
     let rocketLaunchesJSON: [[String: Any]] = [["id": 1698, "name": "Falcon 9 Block 5 | Starlink"], ["id": 1615,"name": "PSLV  | RISAT-2B"], ["id": 1679,"name": "Soyuz 2.1b/Fregat | Glonass-M"], ["id": 1659,"name": "Kuaizhou-1A | Unknown"], ["id": 1661,"name": "Soyuz 2.1a/Fregat | Meridian-M 18"]]

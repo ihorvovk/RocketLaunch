@@ -34,7 +34,7 @@ class LaunchInfoViewReactor: Reactor {
                 launch.isFavorite = !currentState.isFavorite
             }
             
-            return Observable.just(.setFavorite(!currentState.isFavorite))
+            return Observable.just(.setFavorite(launch.isFavorite))
         }
     }
     

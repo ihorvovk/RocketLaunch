@@ -54,7 +54,6 @@
 		FD61AA0F227AE03D00264EC3 /* RxAlamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD61AA0D227AE02300264EC3 /* RxAlamofire.framework */; };
 		FD61AA10227AE03D00264EC3 /* RxAlamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FD61AA0D227AE02300264EC3 /* RxAlamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FDFC83F02285388C00175176 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1AF6A122845622003B08A8 /* RealmSwift.framework */; };
-		FDFC83F22285465700175176 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFC83F12285465700175176 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,7 +129,6 @@
 		FD61AA092279E0D200264EC3 /* RocketLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketLaunch.swift; sourceTree = "<group>"; };
 		FD61AA0B2279E20600264EC3 /* LaunchLibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchLibraryManager.swift; sourceTree = "<group>"; };
 		FD61AA0D227AE02300264EC3 /* RxAlamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxAlamofire.framework; path = Carthage/Build/iOS/RxAlamofire.framework; sourceTree = "<group>"; };
-		FDFC83F12285465700175176 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,7 +187,6 @@
 			isa = PBXGroup;
 			children = (
 				FD61AA0B2279E20600264EC3 /* LaunchLibraryManager.swift */,
-				FDFC83F12285465700175176 /* DataManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -387,7 +384,6 @@
 			files = (
 				FD1F1FBB227F13E7007C83B1 /* Rocket.swift in Sources */,
 				FD145B05227F763D007E75EB /* LaunchInfoViewReactor.swift in Sources */,
-				FDFC83F22285465700175176 /* DataManager.swift in Sources */,
 				FD61AA0A2279E0D200264EC3 /* RocketLaunch.swift in Sources */,
 				FD61A9AE2279BFA700264EC3 /* AppDelegate.swift in Sources */,
 				FD145B04227F7639007E75EB /* LaunchInfoViewController.swift in Sources */,

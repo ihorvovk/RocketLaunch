@@ -81,7 +81,7 @@ class LaunchListViewReactor: Reactor {
         
         var indexes = indexes
         if indexes.count < loadLimit, let lastIndex = indexes.last, lastIndex < currentState.launches.count {
-            indexes += Array(lastIndex + 1 ..< min(lastIndex + loadLimit, currentState.launches.count))
+            indexes += Array(lastIndex + 1 ..< min(lastIndex + 1 + loadLimit - indexes.count, currentState.launches.count))
         }
         
         let ids: [Int] = indexes.compactMap { index in
