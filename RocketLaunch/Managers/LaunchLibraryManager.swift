@@ -75,7 +75,7 @@ class LaunchLibraryManager {
                     realm.deleteAll()
                 }
                 
-                realm.add(launches, update: true)
+                realm.add(launches, update: !deleteOld)
             }
         } catch {
             DDLogError("Failed to write rocket launches to realm")

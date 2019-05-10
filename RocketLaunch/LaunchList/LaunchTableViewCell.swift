@@ -24,6 +24,8 @@ class LaunchTableViewCell: UITableViewCell {
     }
     
     func fill(rocketLaunch: RocketLaunch, delegate: LaunchTableViewCellDelegate) {
+        guard !rocketLaunch.isInvalidated else { return }
+        
         launchID = rocketLaunch.id
         nameLabel.text = rocketLaunch.name
         
